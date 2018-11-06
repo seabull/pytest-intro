@@ -17,11 +17,6 @@ def test_lift_one_bench():
     assert result == {'loaded': 4, 'num_benches': 1, 'unloaded': 0}
 
 
-@pytest.fixture
-def line_N(request):
-    line_size = request.node.get_marker('line_size').args[0]
-    return skilift.Line(line_size)
-
 
 @pytest.mark.line_size(6)
 def test_line_6(line_N):
@@ -30,16 +25,17 @@ def test_line_6(line_N):
     assert line_N.num_people == 0
 
 
-@pytest.fixture
-def BenchN(request):
-    size_ = request.node.get_marker("bench_size").args[0]
-    class BSize(skilift.Bench):
-        size = size_
-    return BSize
+# @pytest.fixture
+# def BenchN(request):
+#     size_ = request.node.get_marker("bench_size").args[0]
+#     class BSize(skilift.Bench):
+#         size = size_
+#     return BSize
 
 
-def test_bench6(BenchN, line_N):
-    pass
+# def test_bench6(BenchN, line_N):
+#     pass
+
 
 
 @pytest.mark.parametrize('l, e', [
